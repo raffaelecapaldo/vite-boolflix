@@ -1,4 +1,6 @@
 <template>
+  <Splash v-if="loading" />
+  <div v-else>
   <header>
     <div class="container-fluid d-flex justify-content-between align-items-center">
       <div class="left d-flex align-items-center ">
@@ -20,6 +22,7 @@
         :rate="store.newRating(show.vote_average)" :lang="'/img/flags/' + show.original_language + '.svg'" :alt="show.original_language"/>
     </div>
   </main>
+</div>
 </template>
 
 <script>
@@ -29,11 +32,14 @@ import Searchbar from './components/Searchbar.vue';
 import Navbar from './components/Navbar.vue';
 import Card from './components/Card.vue';
 import MostPopulars from './components/MostPopulars.vue';
+import Splash from './components/Splash.vue';
 export default {
   name: 'App',
   data() {
     return {
       store,
+      loading:true,
+      intro: new Audio('/effects/intro.mp3') //
     }
   },
   components: {
@@ -41,6 +47,7 @@ export default {
     Navbar,
     Card,
     MostPopulars,
+    Splash
 
   },
   methods: {
@@ -61,9 +68,16 @@ export default {
       })
 
     },
+  },
+  mounted() {
+    setTimeout(() => {
+                this.loading = false
+            }, 5000);
+            this.intro.play()
+        }
   }
 
-}
+
 </script>
 
 <style lang="scss" scoped>
