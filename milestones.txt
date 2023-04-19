@@ -1,0 +1,29 @@
+MILESTONE 1
+Creare la base dell'interfaccia grafica dell'applicazione Web.
+La grafica è composta da:
+- Un header fixed con il logo e una barra di navigazione, sulla sinistra abbiamo il logo e le categorie,
+sulla destra una barra di ricerca con un bottone che ci permetterà di ricercare i film per titolo.
+- Un main contenente le card di ogni film, il contenuto è il poster dello stesso, all'hover del mouse
+la card ha un effetto di capovolgimento, sul lato B sono mostrate varie informazioni reperibili 
+dall'API relative al film (Paese di produzione, rating, trama ecc...)
+Ognuno degli elementi (barra di ricerca, cards ecc...) potrebbe essere un componente.
+
+MILESTONE 2
+Approfondire la documentazioni dell'API al seguente link: https://developers.themoviedb.org/3/getting-started/introduction
+Inizializzare i componenti, creare un file store per gestire le variabili comuni, partendo dalla strutturazione delle chiamate API:
+- Avremo sicuramente un baseUrl con i relativi endpoint e una variabile apikey con la nostra key personale ottenuta da THEMOVIEDB.
+Rendere funzionale la barra di ricerca a destra dell'header, farà una chiamata API all'endpoint per la ricerca dei film,
+il valore v-model dell'input sarà passato come query di ricerca.
+Alla ricerca, popolare il main dell'app con il componente Card creato nella milestone 1, le props saranno passate dall'array di oggetti
+ricevuto come risposta alla chiamata API effettuata.
+
+MILESTONE 3
+Iniziare ad ideare funzionalità aggiuntive magari prendendo spunto da Netflix, potrebbero essere:
+- Popolamento iniziale con le Card del main, prima di qualsiasi ricerca, con una chiamata alle API richiedendo i film più popolari di generi diversi
+- Mostrare il trailer del film più popolare in un nuovo componente, che sarà il primo del main, il video partirà in autoplay al caricamento della pagina
+- Una splash screen durante il loading dell'APP, con in logo di Netflix e il suo effetto sonoro di avvio.
+- Aggiungere ad ogni card un tasto "Aggiungi alla mia lista", quando il tasto viene cliccato l'ID del film viene salvato in un array,
+creare poi un nuovo componente accessibile dalla sezione "La mia lista" situata nella barra di navigazione dell'header,
+alla navigazione verrà effettuata una chiamata API richiedendo i dettagli dei film nella nostra lista, tramite i loro ID, il template del componente
+verrà popolato dalle card con i dati forniti dalla risposta dell'API (come nel caso della ricerca di un film).
+- Aggiungere dettagli estetici a piacimento.
