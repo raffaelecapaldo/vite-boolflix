@@ -1,6 +1,14 @@
 <template>
   <header>
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      <div class="left d-flex align-items-center ">
+      <img class="logo" src="/img/logo.png" alt="">
+      <Navbar />
+  </div>
+  <div class="right">
     <Searchbar @on-search="searchShow()" />
+  </div>
+    </div>
   </header>
   <div class="d-flex gap-3" v-for="show in store.shows" >
     <div class="poster">
@@ -13,12 +21,14 @@
     <p>voto:  <font-awesome-icon v-for='n in newRating(show.vote_average)' :icon="['fas', 'star']" /> </p>
 
   </div>
+
 </template>
 
 <script>
 import { store } from './data/store';
 import axios from 'axios';
 import Searchbar from './components/Searchbar.vue';
+import Navbar from './components/Navbar.vue';
 export default {
   name: 'App',
   data() {
@@ -28,6 +38,7 @@ export default {
   },
   components: {
     Searchbar,
+    Navbar
     
   },
   methods: {
@@ -61,5 +72,12 @@ export default {
 <style lang="scss" scoped>
 .flag {
   width: 20px
+}
+.logo {
+  width: 10rem;
+}
+
+header {
+  background-color: black;
 }
 </style>
