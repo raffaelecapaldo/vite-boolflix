@@ -6,7 +6,9 @@
                     <h6 class=" text-center">{{ title }}</h6>
                     <p class="small m-0" :class="{ 'd-none': title === originalTitle }">Original title: {{ originalTitle }}
                     </p>
-                    <p class="m-0 small">Rating: <font-awesome-icon v-for='n in rate' :icon="['fas', 'star']" /> </p>
+                    <p class="m-0 d-flex align-items-center">Language: <img class="ms-1 flag" :src="lang"></p>
+                    <p class="m-0 small">Rating: {{ rate === 0 ? 'Rating not available' : '' }}<font-awesome-icon v-for='n in rate' :icon="['fas', 'star']" /> </p>
+                    
 
                 </div>
             </div>
@@ -19,7 +21,7 @@
 <script>
 export default {
     name: 'Card',
-    props: ['originalTitle', 'title', 'image', 'rate']
+    props: ['originalTitle', 'title', 'image', 'rate', 'lang']
 }
 </script>
 
@@ -28,7 +30,9 @@ export default {
     transition: 0.3s;
     position: relative;
     cursor: pointer;
-
+    .flag {
+        width: 20px;
+    }
 
     &:hover {
         transform: scale(1.2);

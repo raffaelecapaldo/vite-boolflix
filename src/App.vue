@@ -12,11 +12,12 @@
 
   </header>
   <main>
-    <div class="row cardcontainer">
+    <MostPopulars v-if="store.shows.length === 0"/>
+    <div v-else class="row cardcontainer">
       <Card v-for="show in store.shows" :title="show.title ? show.title : show.name"
         :originalTitle="show.original_title ? show.original_title : show.original_name"
         :image="show.backdrop_path === null ? store.defaultImage : store.imagesUrl + show.backdrop_path"
-        :rate="newRating(show.vote_average)" />
+        :rate="store.newRating(show.vote_average)" :lang="'/img/flags/' + show.original_language + '.svg'" :alt="show.original_language"/>
     </div>
   </main>
 </template>
@@ -27,6 +28,7 @@ import axios from 'axios';
 import Searchbar from './components/Searchbar.vue';
 import Navbar from './components/Navbar.vue';
 import Card from './components/Card.vue';
+import MostPopulars from './components/MostPopulars.vue';
 export default {
   name: 'App',
   data() {
@@ -37,7 +39,8 @@ export default {
   components: {
     Searchbar,
     Navbar,
-    Card
+    Card,
+    MostPopulars,
 
   },
   methods: {
@@ -58,11 +61,6 @@ export default {
       })
 
     },
-    newRating(rate) {
-      rate = parseInt(rate) / 2;
-      rate = Math.ceil(rate);
-      return rate;
-    }
   }
 
 }

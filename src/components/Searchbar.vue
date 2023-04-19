@@ -1,7 +1,7 @@
 <template>
-    <div class="input-group">
-  <input v-model="store.queryStrings.query" type="text" class="form-control" placeholder="Movie title" aria-describedby="button-addon2">
-  <button @click="$emit('onSearch')" class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+    <div class="input-group align-items-center">
+  <input v-model="store.queryStrings.query" type="text" class="form-control" placeholder="Movie title">
+  <button @click="$emit('onSearch')" class="btn-netflix" type="button" id="button-addon2">Search</button>
 </div>
 </template>
 
@@ -18,5 +18,17 @@ import { store } from '../data/store';
 </script>
 
 <style lang="scss" scoped>
+input {
+    border-right:none !important;
+}
+.btn-netflix  {
+    background-color: #9c0812;
+    padding-left:10px;
+    border:none;
+    color:white;
+    border-radius:8%;
+    padding:8px;
+    
+}
 
 </style>
