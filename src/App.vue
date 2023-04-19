@@ -3,8 +3,8 @@
     <Searchbar @on-search="searchShow()" />
   </header>
   <div class="d-flex gap-3" v-for="show in store.shows" >
-    <p>titolo:{{ show.title }}</p>
-    <p>titolo originale:{{ show.original_title }}</p>
+    <p>titolo:{{ show.title ? show.title : show.name }}</p>
+    <p>titolo originale:{{ show.original_title ? show.original_title : show.original_name }}</p>
     <p>lingua: <img class="flag" :src="'/img/flags/' + show.original_language + '.svg'" :alt="show.original_language"></p>
     <p>voto:{{ show.vote_average }}</p>
 
@@ -35,9 +35,14 @@ export default {
         }
       }
       axios.get(store.apiUrl + store.endpoints.search + '/' + store.endpoints.movie, {params}).then((res) => {
-        store.shows = res.data.results;
-        console.log(store.shows)
+        store.movies = res.data.results;//Chiamta l'endpoint movie e inserisci il risultato in un suo array
+
       })
+      axios.get(store.apiUrl + store.endpoints.search + '/' + store.endpoints.tv, {params}).then((res) => {
+        store.shows = store.movies.concat(res.data.results)//Chiama endpoint tv e concatena l'array movie con il nuovo array ricevuto, in un nuovo array: shows
+
+      })
+      
     }
   }
 
