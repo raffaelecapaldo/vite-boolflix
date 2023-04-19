@@ -14,7 +14,7 @@
 
   </header>
   <main>
-    <MostPopulars v-if="store.shows.length === 0"/>
+    <MostPopulars v-if="store.shows.length === 0 && searched === false "/>
     <div v-else class="row cardcontainer">
       <Card v-for="show in store.shows" :title="show.title ? show.title : show.name"
         :originalTitle="show.original_title ? show.original_title : show.original_name"
@@ -39,7 +39,8 @@ export default {
     return {
       store,
       loading:true,
-      intro: new Audio('/effects/intro.mp3') //
+      intro: new Audio('/effects/intro.mp3'), //
+      searched:false,
     }
   },
   components: {
@@ -52,6 +53,8 @@ export default {
   },
   methods: {
     searchShow() {
+      store.queryStrings.search === '' ? this.searched = true : this.searched = false
+      store.shows.length = 0;
       let params = {}
       for (let key in store.queryStrings) {
         if (store.queryStrings[key]) {

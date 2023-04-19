@@ -193,7 +193,7 @@ $base-color: #e40913
 	justify-content: center
 	align-items: center
 	width: 100%
-	height: 100vh
+	height: 100dvh
 	background-color: $bg-color
 	overflow: hidden
 	
