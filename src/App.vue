@@ -3,10 +3,14 @@
     <Searchbar @on-search="searchShow()" />
   </header>
   <div class="d-flex gap-3" v-for="show in store.shows" >
+    <div class="poster">
+      <img :src="store.imagesUrl + show.poster_path" alt="">
+    </div>
     <p>titolo:{{ show.title ? show.title : show.name }}</p>
     <p>titolo originale:{{ show.original_title ? show.original_title : show.original_name }}</p>
+ 
     <p>lingua: <img class="flag" :src="'/img/flags/' + show.original_language + '.svg'" :alt="show.original_language"></p>
-    <p>voto:{{ show.vote_average }}</p>
+    <p>voto:  <font-awesome-icon v-for='n in newRating(show.vote_average)' :icon="['fas', 'star']" /> </p>
 
   </div>
 </template>
@@ -43,6 +47,11 @@ export default {
 
       })
       
+    },
+    newRating(rate) {
+      rate = parseInt(rate) / 2;
+      rate = Math.ceil(rate);
+      return rate;
     }
   }
 
