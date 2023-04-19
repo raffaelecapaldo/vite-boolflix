@@ -5,7 +5,7 @@
   <div class="d-flex gap-3" v-for="show in store.shows" >
     <p>titolo:{{ show.title }}</p>
     <p>titolo originale:{{ show.original_title }}</p>
-    <p>lingua:{{ show.original_language }}</p>
+    <p>lingua: <img class="flag" :src="'/img/flags/' + show.original_language + '.svg'" :alt="show.original_language"></p>
     <p>voto:{{ show.vote_average }}</p>
 
   </div>
@@ -24,6 +24,7 @@ export default {
   },
   components: {
     Searchbar,
+    
   },
   methods: {
     searchShow() {
@@ -43,4 +44,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.flag {
+  width: 20px
+}
+</style>
