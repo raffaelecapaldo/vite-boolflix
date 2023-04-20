@@ -6,7 +6,7 @@
             mute: 1,
         }" @ready="onReady" width="1900" height="1200" ref="youtube" />
         <font-awesome-icon @click="toggleVolume()" class="icon"
-            :icon="!muted ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark'" /> />
+            :icon="!muted ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark'" />
     </div>
 </template>
 

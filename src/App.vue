@@ -21,6 +21,7 @@
 
       <MostPopulars v-if="store.shows.length === 0 && notsearched" />
       <Loader v-else-if="searchLoading" />
+      <NotFound v-else-if="store.shows.length === 0 && !notsearched" />
       <div v-else class="row cardcontainer">
         <Card v-for="(show, index) in store.shows" :title="show.title ? show.title : show.name"
           :originalTitle="show.original_title ? show.original_title : show.original_name"
@@ -42,6 +43,7 @@ import MostPopulars from './components/MostPopulars.vue';
 import Splash from './components/Splash.vue';
 import Loader from './components/Loader.vue'
 import Trailers from './components/Trailers.vue'
+import NotFound from './components/NotFound.vue';
 export default {
   name: 'App',
   data() {
@@ -62,7 +64,7 @@ export default {
     Splash,
     Loader,
     Trailers,
-
+    NotFound,
   },
   methods: {
     searchShow() {
