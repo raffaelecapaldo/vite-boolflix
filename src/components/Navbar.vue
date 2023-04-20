@@ -26,6 +26,9 @@
     a {
         text-decoration: none;
         color:white;
+        &:hover {
+           color: #9c0812;
+        }
     }
     }
 

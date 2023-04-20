@@ -15,7 +15,9 @@
 
   </header>
   <main>
+  
     <MostPopulars v-if="store.shows.length === 0 && notsearched "/>
+    <Loader v-else-if="searchLoading" />
     <div v-else class="row cardcontainer">
       <Card v-for="(show,index) in store.shows" :title="show.title ? show.title : show.name"
         :originalTitle="show.original_title ? show.original_title : show.original_name"
@@ -34,6 +36,7 @@ import Navbar from './components/Navbar.vue';
 import Card from './components/Card.vue';
 import MostPopulars from './components/MostPopulars.vue';
 import Splash from './components/Splash.vue';
+import Loader from './components/Loader.vue'
 export default {
   name: 'App',
   data() {
@@ -42,6 +45,7 @@ export default {
       loading:true,
       intro: new Audio('/effects/intro.mp3'), //
       notsearched:true,
+      searchLoading:false,
     }
   },
   components: {
@@ -49,11 +53,13 @@ export default {
     Navbar,
     Card,
     MostPopulars,
-    Splash
+    Splash,
+    Loader
 
   },
   methods: {
     searchShow() {
+      this.searchLoading = true;
       console.log(store.queryStrings.query);
       store.queryStrings.query == '' ? this.notsearched = true : this.notsearched = false
       store.movies.length = 0;//svuoto entrambi gli array
@@ -70,6 +76,7 @@ export default {
       })
       axios.get(store.apiUrl + store.endpoints.search + '/' + store.endpoints.tv, { params }).then((res) => {
         store.shows = store.movies.concat(res.data.results)//Chiama endpoint tv e concatena l'array movie con il nuovo array ricevuto, in un nuovo array: shows
+        this.searchLoading = false;
 
       })
 
@@ -99,4 +106,10 @@ export default {
   width: 95%;
   margin: 0 auto;
 }
+
+.loading {
+  height: 100dvh;
+}
+
+
 </style>

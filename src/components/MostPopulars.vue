@@ -1,13 +1,13 @@
 <template>
     <div class="most-populars pt-2">
-        <h3 class="text-white">Most populars movies </h3>
+        <h3 class="text-white">Most popular movies </h3>
         <div class="row">
             <Card v-for="(show,index) in popularsMovies" :title="show.title" :originalTitle="show.original_title"
                 :image="show.backdrop_path === null ? store.defaultImage : store.imagesUrl + show.backdrop_path" :rate="store.newRating(show.vote_average)"  :overview="show.overview" :lang="'/img/flags/' + show.original_language + '.svg'" :alt="show.original_language" :id="index" />
         </div>
     </div>
     <div class="most-populars pt-2">
-        <h3 class="text-white">Most populars TV shows </h3>
+        <h3 class="text-white">Most popular TV shows </h3>
         <div class="row">
             <Card v-for="(show,index) in popularsTV" :title="show.name" :originalTitle="show.original_name"
                 :image="show.backdrop_path === null ? store.defaultImage : store.imagesUrl + show.backdrop_path" :rate="store.newRating(show.vote_average)" :overview="show.overview" :lang="'/img/flags/' + show.original_language + '.svg'" :alt="show.original_language" :id="index"/>
