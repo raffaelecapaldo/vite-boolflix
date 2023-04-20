@@ -22,6 +22,8 @@ export const store = reactive({
         rate = Math.ceil(rate);
         return rate;
       },
+      notsearched: true,
+
 
 
 })

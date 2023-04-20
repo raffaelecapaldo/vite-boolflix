@@ -4,7 +4,7 @@
         <YouTube class="player" :src="videoToPlay" :vars="{
             autoplay: 1,
             mute: 1,
-        }" @ready="onReady" width="1900" height="1200" ref="youtube" />
+        }"  width="1900" height="1200" ref="youtube" />
         <font-awesome-icon @click="toggleVolume()" class="icon"
             :icon="!muted ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark'" />
     </div>

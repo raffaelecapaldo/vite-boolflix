@@ -17,11 +17,11 @@
 
     </header>
     <main>
-      <Trailers v-if="store.shows.length === 0 && notsearched" />
+      <Trailers v-if="store.shows.length === 0 && store.notsearched" />
 
-      <MostPopulars v-if="store.shows.length === 0 && notsearched" />
+      <MostPopulars v-if="store.shows.length === 0 && store.notsearched" />
       <Loader v-else-if="searchLoading" />
-      <NotFound v-else-if="store.shows.length === 0 && !notsearched" />
+      <NotFound v-else-if="store.shows.length === 0 && !store.notsearched" />
       <div v-else class="row cardcontainer">
         <Card v-for="(show, index) in store.shows" :title="show.title ? show.title : show.name"
           :originalTitle="show.original_title ? show.original_title : show.original_name"
@@ -51,7 +51,6 @@ export default {
       store,
       loading: true,
       intro: new Audio('/effects/intro.mp3'), //
-      notsearched: true,
       searchLoading: false,
       loadTrailers: false,
     }
@@ -70,7 +69,7 @@ export default {
     searchShow() {
       this.searchLoading = true;
       console.log(store.queryStrings.query);
-      store.queryStrings.query == '' ? this.notsearched = true : this.notsearched = false
+      store.queryStrings.query == '' ? store.notsearched = true : store.notsearched = false
       store.movies.length = 0;//svuoto entrambi gli array
       store.shows.length = 0;
       let params = {}
