@@ -1,6 +1,6 @@
 <template>
     <div class="input-group align-items-center">
-  <input v-model="store.queryStrings.query" type="text" class="form-control" placeholder="Movie title">
+  <input @keyup.enter="$emit('onSearch')" v-model="store.queryStrings.query" type="text" class="form-control" placeholder="Movie title">
   <button @click="$emit('onSearch')" class="btn-netflix" type="button" id="button-addon2">Search</button>
 </div>
 </template>

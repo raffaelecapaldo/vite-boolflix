@@ -4,8 +4,8 @@
   <div v-show='!loading'>
   <header>
     <div class="container-fluid d-flex justify-content-between align-items-center">
-      <div class="left d-flex align-items-center ">
-        <img class="logo" src="/img/logo.png" alt="">
+      <div class="left d-flex align-items-center">
+        <img class="logo" src="/img/logo.png" alt="netflix logo">
         <Navbar />
       </div>
       <div class="right">
@@ -56,7 +56,8 @@ export default {
     searchShow() {
       console.log(store.queryStrings.query);
       store.queryStrings.query == '' ? this.notsearched = true : this.notsearched = false
-      store.shows = [];
+      store.movies.length = 0;//svuoto entrambi gli array
+      store.shows.length = 0;
       let params = {}
       for (let key in store.queryStrings) {
         if (store.queryStrings[key]) {
