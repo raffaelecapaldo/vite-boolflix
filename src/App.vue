@@ -56,7 +56,7 @@ export default {
     searchShow() {
       console.log(store.queryStrings.query);
       store.queryStrings.query == '' ? this.notsearched = true : this.notsearched = false
-      store.shows.length = [];
+      store.shows = [];
       let params = {}
       for (let key in store.queryStrings) {
         if (store.queryStrings[key]) {
