@@ -27,7 +27,7 @@ export default {
     },
     computed: {
         videoToPlay() {
-            return this.videos[this.getRndInteger(0, this.videos.length)];//Prendi un video a caso tra quelli nell'array
+            return this.videos[this.getRndInteger(0, this.videos.length - 1)];//Prendi un video a caso tra quelli nell'array
         },
     },
     data() {
