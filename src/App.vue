@@ -1,6 +1,7 @@
 <template>
   <Splash v-if="loading" />
-  <div v-else>
+  <!-- carica in d-none i componenti mentre mostra lo splash -->
+  <div v-show='!loading'>
   <header>
     <div class="container-fluid d-flex justify-content-between align-items-center">
       <div class="left d-flex align-items-center ">
@@ -53,7 +54,8 @@ export default {
   },
   methods: {
     searchShow() {
-      store.queryStrings.search === '' ? this.notsearched = true : this.notsearched = false
+      console.log(store.queryStrings.query);
+      store.queryStrings.query == '' ? this.notsearched = true : this.notsearched = false
       store.shows.length = [];
       let params = {}
       for (let key in store.queryStrings) {
