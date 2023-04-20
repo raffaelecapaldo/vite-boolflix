@@ -1,7 +1,7 @@
 <template>
-  <Splash @click="store.clicked = true" v-if="loading" />
+  <Splash v-if="loading" />
   <!-- carica in d-none i componenti mentre mostra lo splash -->
-  <div @click="store.clicked = true" v-show='!loading'>
+  <div v-show='!loading'>
     <header>
       <div class="container-fluid d-flex justify-content-between align-items-center">
         <div class="left d-flex align-items-center">
@@ -51,6 +51,7 @@ export default {
       intro: new Audio('/effects/intro.mp3'), //
       notsearched: true,
       searchLoading: false,
+      loadTrailers: false,
     }
   },
   components: {
@@ -92,6 +93,7 @@ export default {
     setTimeout(() => {
       this.loading = false
     }, 5000);
+
     this.intro.loop = false;
     this.intro.play()
   }

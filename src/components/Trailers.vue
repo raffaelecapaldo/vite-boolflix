@@ -1,7 +1,7 @@
 <template>
     <div class="youtube">
         <!-- A causa delle politiche di chrome, un video in autoplay parte solo se mutato, rimuovo il mute appena l'utente interagisce con la pagina -->
-        <iframe width="1900" height="1200" :src="videoToPlay + (store.clicked === false ? '&mute=1' : '&mute=0')"
+        <iframe width="1900" height="1200" :src="videoToPlay"
             frameborder="0"></iframe>
     </div>
 </template>
@@ -25,10 +25,10 @@ export default {
         return {
             store,
             videos: [
-                'https://www.youtube.com/embed/3CQ0HsGZzM4?controls=0&autoplay=1',
-                'https://www.youtube.com/embed/eyOP-gA4tIo?controls=0&autoplay=1',
-                'https://www.youtube.com/embed/o7nkJDjuSp4?controls=0&autoplay=1',
-                'https://www.youtube.com/embed/8-UEA3SLKQI?controls=0&autoplay=1',
+                'https://www.youtube-nocookie.com/embed/3CQ0HsGZzM4?controls=0&autoplay=1&mute=1&',
+                'https://www.youtube-nocookie.com/embed/eyOP-gA4tIo?controls=0&autoplay=1&mute=1&',
+                'https://www.youtube-nocookie.com/embed/o7nkJDjuSp4?controls=0&autoplay=1&mute=1&',
+                'https://www.youtube-nocookie.com/embed/8-UEA3SLKQI?controls=0&autoplay=1&mute=1&',
             ]
         }
     }
