@@ -21,7 +21,8 @@ export const store = reactive({
         rate = parseInt(rate) / 2;
         rate = Math.ceil(rate);
         return rate;
-      }
+      },
+    clicked:false
 
 
 })

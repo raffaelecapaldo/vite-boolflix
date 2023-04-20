@@ -1,31 +1,35 @@
 <template>
-  <Splash v-if="loading" />
+  <Splash @click="store.clicked = true" v-if="loading" />
   <!-- carica in d-none i componenti mentre mostra lo splash -->
-  <div v-show='!loading'>
-  <header>
-    <div class="container-fluid d-flex justify-content-between align-items-center">
-      <div class="left d-flex align-items-center">
-        <img class="logo" src="/img/logo.png" alt="netflix logo">
-        <Navbar />
-      </div>
-      <div class="right">
-        <Searchbar @on-search="searchShow()" />
-      </div>
-    </div>
+  <div @click="store.clicked = true" v-show='!loading'>
+    <header>
+      <div class="container-fluid d-flex justify-content-between align-items-center">
+        <div class="left d-flex align-items-center">
+          <img class="logo" src="/img/logo.png" alt="netflix logo">
+          <Navbar />
+        </div>
+        <div class="right">
+          <Searchbar @on-search="searchShow()" />
+        </div>
 
-  </header>
-  <main>
-  
-    <MostPopulars v-if="store.shows.length === 0 && notsearched "/>
-    <Loader v-else-if="searchLoading" />
-    <div v-else class="row cardcontainer">
-      <Card v-for="(show,index) in store.shows" :title="show.title ? show.title : show.name"
-        :originalTitle="show.original_title ? show.original_title : show.original_name"
-        :image="show.backdrop_path === null ? store.defaultImage : store.imagesUrl + show.backdrop_path"
-        :rate="store.newRating(show.vote_average)" :lang="'/img/flags/' + show.original_language + '.svg'" :overview="show.overview" :alt="show.original_language" :id="index"/>
-    </div>
-  </main>
-</div>
+
+      </div>
+
+    </header>
+    <main>
+      <Trailers v-if="store.shows.length === 0 && notsearched" />
+
+      <MostPopulars v-if="store.shows.length === 0 && notsearched" />
+      <Loader v-else-if="searchLoading" />
+      <div v-else class="row cardcontainer">
+        <Card v-for="(show, index) in store.shows" :title="show.title ? show.title : show.name"
+          :originalTitle="show.original_title ? show.original_title : show.original_name"
+          :image="show.backdrop_path === null ? store.defaultImage : store.imagesUrl + show.backdrop_path"
+          :rate="store.newRating(show.vote_average)" :lang="'/img/flags/' + show.original_language + '.svg'"
+          :overview="show.overview" :alt="show.original_language" :id="index" />
+      </div>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -37,15 +41,16 @@ import Card from './components/Card.vue';
 import MostPopulars from './components/MostPopulars.vue';
 import Splash from './components/Splash.vue';
 import Loader from './components/Loader.vue'
+import Trailers from './components/Trailers.vue'
 export default {
   name: 'App',
   data() {
     return {
       store,
-      loading:true,
+      loading: true,
       intro: new Audio('/effects/intro.mp3'), //
-      notsearched:true,
-      searchLoading:false,
+      notsearched: true,
+      searchLoading: false,
     }
   },
   components: {
@@ -54,7 +59,8 @@ export default {
     Card,
     MostPopulars,
     Splash,
-    Loader
+    Loader,
+    Trailers,
 
   },
   methods: {
@@ -84,11 +90,12 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-                this.loading = false
-            }, 5000);
-            this.intro.play()
-        }
+      this.loading = false
+    }, 5000);
+    this.intro.loop = false;
+    this.intro.play()
   }
+}
 
 
 </script>
@@ -110,6 +117,4 @@ export default {
 .loading {
   height: 100dvh;
 }
-
-
 </style>
