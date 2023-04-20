@@ -17,10 +17,10 @@
   <main>
     <MostPopulars v-if="store.shows.length === 0 && notsearched "/>
     <div v-else class="row cardcontainer">
-      <Card v-for="show in store.shows" :title="show.title ? show.title : show.name"
+      <Card v-for="(show,index) in store.shows" :title="show.title ? show.title : show.name"
         :originalTitle="show.original_title ? show.original_title : show.original_name"
         :image="show.backdrop_path === null ? store.defaultImage : store.imagesUrl + show.backdrop_path"
-        :rate="store.newRating(show.vote_average)" :lang="'/img/flags/' + show.original_language + '.svg'" :alt="show.original_language"/>
+        :rate="store.newRating(show.vote_average)" :lang="'/img/flags/' + show.original_language + '.svg'" :overview="show.overview" :alt="show.original_language" :id="index"/>
     </div>
   </main>
 </div>

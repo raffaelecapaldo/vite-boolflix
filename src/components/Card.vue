@@ -1,7 +1,7 @@
 <template>
-    <div class="col-6 col-sm-4 col-lg-3 col-xxl-2 pt-3">
+    <div @click="current === id ? current = '' : current = id" @mouseleave="current = ''"  class="col-6 col-sm-4 col-lg-3 col-xxl-2 pt-3">
         <div class="showcard">
-            <div class="infocard">
+            <div :class="{'d-none' : id === current}" class="infocard">
                 <div class="p-2 text-white">
                     <h6 class=" text-center">{{ title }}</h6>
                     <p class="small m-0" :class="{ 'd-none': title === originalTitle }">Original title: {{ originalTitle }}
@@ -12,7 +12,13 @@
 
                 </div>
             </div>
-            <img class="img-fluid" :src='image' alt="">
+            <div :class="{'d-block' : id === current}" class="infocardb">
+                <div class="p-2 text-white">
+                    <h6 class=" text-center">{{ title }}</h6>
+                    <p class="small">Storyline: {{ overview.substring(0, 150) + '...' }}</p>
+                </div>
+            </div>
+            <img :class="{active: id === current}" class="img-fluid" :src='image' alt="">
 
         </div>
     </div>
@@ -21,7 +27,12 @@
 <script>
 export default {
     name: 'Card',
-    props: ['originalTitle', 'title', 'image', 'rate', 'lang']
+    props: ['id','originalTitle', 'title', 'image', 'rate', 'lang', 'overview'],
+    data() {
+        return {
+            current:'',
+        }
+    }
 }
 </script>
 
@@ -48,16 +59,23 @@ export default {
             height: fit-content;
         }
 
+        .infocardb {
+            min-height: 100px;
+            height: fit-content;
+            z-index:100;
+        }
+
     }
 
     img {
         border-radius: 2%;
+        transition:0.3s;
 
 
     }
 }
 
-.infocard {
+.infocard, .infocardb {
     position: absolute;
     bottom: -90px;
     left: 0px;
@@ -68,5 +86,14 @@ export default {
     height: fit-content;
 
 
+}
+
+.infocardb {
+    display:none;
+    bottom:-130px
+}
+
+.active {
+    transform: rotateY( 180deg ) !important;
 }
 </style>
