@@ -1,6 +1,6 @@
 <template>
-    <div @click="current === id ? current = '' : current = id" @mouseleave="current = ''"  class="col-6 col-sm-4 col-lg-3 col-xxl-2 pt-3">
-        <div class="showcard">
+    <div  @click="current === id ? current = '' : current = id" @mouseleave="current = ''"  class="col-6 col-sm-4 col-lg-3 col-xxl-2 pt-3">
+        <div :class="{active: id === current}" class="showcard">
             <div :class="{'d-none' : id === current}" class="infocard">
                 <div class="p-2 text-white">
                     <h6 class=" text-center">{{ title }}</h6>
@@ -13,12 +13,14 @@
                 </div>
             </div>
             <div :class="{'d-block' : id === current}" class="infocardb">
+                <div class="no-rotate">
                 <div class="p-2 text-white">
                     <h6 class=" text-center">{{ title }}</h6>
-                    <p class="small">Storyline: {{ overview.substring(0, 150) + '...' }}</p>
+                    <p class="small">Storyline: {{ overview === '' ? 'There is no storyline available' : (overview.substring(0, 150) + '...') }}</p>
                 </div>
             </div>
-            <img :class="{active: id === current}" class="img-fluid" :src='image' alt="">
+            </div>
+            <img  class="img-fluid" :src='image' alt="">
 
         </div>
     </div>
@@ -90,10 +92,17 @@ export default {
 
 .infocardb {
     display:none;
-    bottom:-130px
+    
 }
 
+.no-rotate {
+        transform: rotateY(180deg) !important;
+        
+        
+    }
 .active {
-    transform: rotateY( 180deg ) !important;
+    transform: rotateY( 180deg ) scale(1.2)  !important;
+        transform-origin: center center;
+        z-index: 3;
 }
 </style>
