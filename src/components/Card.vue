@@ -12,7 +12,7 @@
                     <p class="m-0 d-flex align-items-center">Language: <img class="ms-1 flag"
                             :src="'/img/flags/' + item.original_language + '.svg'"></p>
                     <p class="m-0 small">Rating: {{ item.vote_average === 0 ? 'Rating not available' : ''
-                    }}<font-awesome-icon v-for='n in store.newRating(item.vote_average)' :icon="['fas', 'star']" /> </p>
+                    }}<font-awesome-icon v-for='n in 5' :icon="n <= store.newRating(item.vote_average) ? 'fa-solid fa-star' : 'fa-regular fa-star'" /> </p>
 
 
                 </div>
