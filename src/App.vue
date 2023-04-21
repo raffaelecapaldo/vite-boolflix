@@ -69,11 +69,15 @@ export default {
       store.getData(store.endpoints.search, 'movies'),
         store.getData(store.endpoints.search, 'tv')
       function wait() {
-        if (store.movies.length > 0 || store.tv.length > 0) {
-          store.searchLoading = false;
+        if (store.movies.length > 0 || store.tv.length > 0) {//Controlla se gli array sono vuoti
+          store.searchLoading = false;//Se non lo sono ha finito di caricare
+
         }
       }
       setInterval(wait, 100);
+      setTimeout(() => {//Se dopo un secondo e mezzo sono ancora vuoti entrambi, non ha trovato nulla, termina il caricamento
+        store.searchLoading = false;
+      }, 1500)
     },
   },
   mounted() {

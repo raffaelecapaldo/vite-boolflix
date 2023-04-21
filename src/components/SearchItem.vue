@@ -1,7 +1,7 @@
 <template>
         <div class="row">
             <h1 class="text-white mt-2">{{ category }}</h1>
-            <NotFound v-if="array.length === 0" :error="'No' + category + 'founded'" cta="Try searching something else" />
+            <NotFound v-if="array.length === 0" :error="'No ' + category + ' founded'" cta="Try searching something else" />
             <Card v-else v-for="(show, index) in array" :item="show" :id="index" />
         </div>
 </template>
