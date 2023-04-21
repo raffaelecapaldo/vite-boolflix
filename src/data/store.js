@@ -33,6 +33,11 @@ export const store = reactive({
                 params[key] = store.queryStrings[key]
             }
         }
+        let url = store.apiUrl + store.endpoints[endpoint] + '/' + store.endpoints[category]
+        console.log(store.endpoints[endpoint])
+        console.log(store.endpoints[category])
+        console.log(category)
+        console.log(url );
         axios.get(store.apiUrl + store.endpoints[endpoint] + '/' + store.endpoints[category], { params }).then((res) => {
             if (endpoint != store.endpoints.search) {
                 store['extra'+endpoint] = res.data.results;

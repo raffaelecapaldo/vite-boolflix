@@ -66,8 +66,8 @@ export default {
       store.queryStrings.query == '' ? store.notsearched = true : store.notsearched = false
       store.movies.length = 0;//svuoto entrambi gli array
       store.tv.length = 0;
-      store.getData(store.endpoints.search, 'movies'),
-        store.getData(store.endpoints.search, 'tv')
+      store.getData('search', 'movies'),
+        store.getData('search', 'tv')
       function wait() {
         if (store.movies.length > 0 || store.tv.length > 0) {//Controlla se gli array sono vuoti
           store.searchLoading = false;//Se non lo sono ha finito di caricare

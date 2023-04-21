@@ -28,8 +28,8 @@ export default {
     },
     methods: {
         getPopulars() {
-         store.getData('movies', store.endpoints.popular);
-         store.getData('tv', store.endpoints.topRated); //il valore viene letto come undefined
+         store.getData('movies', 'popular');
+         store.getData('tv', 'topRated'); //il valore viene letto come undefined
         }
     },
     mounted() {
