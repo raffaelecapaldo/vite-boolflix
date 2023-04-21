@@ -67,8 +67,6 @@ export default {
       store.searchLoading = true;
       console.log(store.queryStrings.query);
       store.queryStrings.query == '' ? store.notsearched = true : store.notsearched = false
-      store.movies.length = 0;//svuoto entrambi gli array
-      store.tv.length = 0;
       store.getData('search', 'movies'),
         store.getData('search', 'tv')
       function wait() {
