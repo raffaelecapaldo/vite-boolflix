@@ -11,7 +11,7 @@ export const store = reactive({
         movies: 'movie',
         tv: 'tv',
         popular: 'popular',
-        topRated: 'top_rated'
+        topRated: 'top_rated',
     },
     queryStrings: {
         api_key: '6043bd276afcbd1e16de3c10768340c4',

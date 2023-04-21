@@ -29,7 +29,7 @@ export default {
     methods: {
         getPopulars() {
          store.getData('movies', store.endpoints.popular);
-         store.getData('tv', store.endpoints.popular);
+         store.getData('tv', store.endpoints.topRated); //il valore viene letto come undefined
         }
     },
     mounted() {
