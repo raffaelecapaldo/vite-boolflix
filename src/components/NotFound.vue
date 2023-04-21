@@ -1,9 +1,9 @@
 <template>
     <div class="not-found d-flex justify-content-center align-items-center">
         <div class="title mt-5">
-        <h1 class="text-white fs-1 text-center">404 NOT FOUND</h1>
+        <h1 class="text-white fs-1 text-center">{{ error}}</h1>
         <div>
-        <p class="fs-1">Try to search something else</p>
+        <p class="fs-1">{{ cta }}</p>
         <p class="fs-1 text-center">:(</p>
     </div>
     </div>
@@ -13,6 +13,7 @@
 <script>
     export default {
         name:'NotFound',
+        props: ['error', 'cta']
     }
 </script>
 

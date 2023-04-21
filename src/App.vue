@@ -17,25 +17,18 @@
 
     </header>
     <main>
-      <Trailers v-if="store.shows.length === 0 && store.notsearched" />
+      <Trailers v-if="store.movies.length === 0 && store.tv.length === 0 && store.notsearched" />
+      <MostPopulars v-if="store.movies.length === 0 && store.tv.length === 0 && store.notsearched" />
+      <Loader v-else-if="store.searchLoading" />
+      <SearchResult v-else />
 
-      <MostPopulars v-if="store.shows.length === 0 && store.notsearched" />
-      <Loader v-else-if="searchLoading" />
-      <NotFound v-else-if="store.shows.length === 0 && !store.notsearched" />
-      <div v-else class="row cardcontainer">
-        <Card v-for="(show, index) in store.shows" :title="show.title ? show.title : show.name"
-          :originalTitle="show.original_title ? show.original_title : show.original_name"
-          :image="show.backdrop_path === null ? store.defaultImage : store.imagesUrl + show.backdrop_path"
-          :rate="store.newRating(show.vote_average)" :lang="'/img/flags/' + show.original_language + '.svg'"
-          :overview="show.overview" :alt="show.original_language" :id="index" />
-      </div>
+      <!-- ---- -->
     </main>
   </div>
 </template>
 
 <script>
 import { store } from './data/store';
-import axios from 'axios';
 import Searchbar from './components/Searchbar.vue';
 import Navbar from './components/Navbar.vue';
 import Card from './components/Card.vue';
@@ -44,6 +37,7 @@ import Splash from './components/Splash.vue';
 import Loader from './components/Loader.vue'
 import Trailers from './components/Trailers.vue'
 import NotFound from './components/NotFound.vue';
+import SearchResult from './components/SearchResult.vue';
 export default {
   name: 'App',
   data() {
@@ -51,7 +45,6 @@ export default {
       store,
       loading: true,
       intro: new Audio('/effects/intro.mp3'), //
-      searchLoading: false,
       loadTrailers: false,
     }
   },
@@ -64,30 +57,23 @@ export default {
     Loader,
     Trailers,
     NotFound,
+    SearchResult,
   },
   methods: {
     searchShow() {
-      this.searchLoading = true;
+      store.searchLoading = true;
       console.log(store.queryStrings.query);
       store.queryStrings.query == '' ? store.notsearched = true : store.notsearched = false
       store.movies.length = 0;//svuoto entrambi gli array
-      store.shows.length = 0;
-      let params = {}
-      for (let key in store.queryStrings) {
-        if (store.queryStrings[key]) {
-          params[key] = store.queryStrings[key]
+      store.tv.length = 0;
+      store.getData(store.endpoints.search, 'movies'),
+        store.getData(store.endpoints.search, 'tv')
+      function wait() {
+        if (store.movies.length > 0 || store.tv.length > 0) {
+          store.searchLoading = false;
         }
       }
-      axios.get(store.apiUrl + store.endpoints.search + '/' + store.endpoints.movie, { params }).then((res) => {
-        store.movies = res.data.results;//Chiamta l'endpoint movie e inserisci il risultato in un suo array
-
-      })
-      axios.get(store.apiUrl + store.endpoints.search + '/' + store.endpoints.tv, { params }).then((res) => {
-        store.shows = store.movies.concat(res.data.results)//Chiama endpoint tv e concatena l'array movie con il nuovo array ricevuto, in un nuovo array: shows
-        this.searchLoading = false;
-
-      })
-
+      setInterval(wait, 100);
     },
   },
   mounted() {

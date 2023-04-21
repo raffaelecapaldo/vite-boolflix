@@ -25,7 +25,8 @@ import { store } from '../data/store';
             toHome() {
                 store.notsearched = true;
                 store.queryStrings.query = '';
-                store.shows.length = 0;
+                store.tv.length = 0;
+                store.movies.length = 0;
             }
         }
     }

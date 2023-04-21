@@ -67,10 +67,10 @@ export default {
 .icon {
     position: absolute;
     top: 20px;
-    font-size: 5rem;
+    font-size: 3rem;
     background-color: white;
     border-radius: 50%;
-    padding: 20px;
+    padding: 10px;
     right: 50px;
     cursor: pointer;
 }
