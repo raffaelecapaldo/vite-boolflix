@@ -28,6 +28,7 @@ export default {
     },
     methods: {
         getPopulars() {
+         store.apiError = false;
          store.getData('movies', 'popular');
          store.getData('tv', 'topRated'); //il valore viene letto come undefined
         }

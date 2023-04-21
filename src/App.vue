@@ -5,7 +5,8 @@
     <header>
       <div class="container-fluid d-flex justify-content-between align-items-center">
         <div class="left d-flex align-items-center">
-          <img class="logo" src="/img/logo.png" alt="netflix logo">
+          <img class="logo d-none d-sm-block" src="/img/logo.png" alt="netflix logo">
+          <img class="small-logo d-block d-sm-none" src="/img/small-logo.png" alt="netflix logo">
           <Navbar />
         </div>
         <div class="right">
@@ -17,7 +18,8 @@
 
     </header>
     <main>
-      <Trailers v-if="store.movies.length === 0 && store.tv.length === 0 && store.notsearched" />
+      <NotFound v-if="store.apiError" error="Internal database error" cta="Please try again or refresh the page" />
+      <Trailers v-else-if="store.movies.length === 0 && store.tv.length === 0 && store.notsearched" />
       <MostPopulars v-if="store.movies.length === 0 && store.tv.length === 0 && store.notsearched" />
       <Loader v-else-if="store.searchLoading" />
       <SearchResult v-else />
@@ -61,6 +63,7 @@ export default {
   },
   methods: {
     searchShow() {
+      store.apiError = false;
       store.searchLoading = true;
       console.log(store.queryStrings.query);
       store.queryStrings.query == '' ? store.notsearched = true : store.notsearched = false
@@ -105,6 +108,10 @@ export default {
 .cardcontainer {
   width: 95%;
   margin: 0 auto;
+}
+
+.small-logo {
+width: 40px;
 }
 
 .loading {

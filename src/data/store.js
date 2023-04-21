@@ -21,6 +21,7 @@ export const store = reactive({
     movies: [],
     extramovies: [],
     extratv: [],
+    apiError: false,
     newRating(rate) {
         rate = parseInt(rate) / 2;
         rate = Math.ceil(rate);
@@ -33,11 +34,6 @@ export const store = reactive({
                 params[key] = store.queryStrings[key]
             }
         }
-        let url = store.apiUrl + store.endpoints[endpoint] + '/' + store.endpoints[category]
-        console.log(store.endpoints[endpoint])
-        console.log(store.endpoints[category])
-        console.log(category)
-        console.log(url );
         axios.get(store.apiUrl + store.endpoints[endpoint] + '/' + store.endpoints[category], { params }).then((res) => {
             if (endpoint != store.endpoints.search) {
                 store['extra'+endpoint] = res.data.results;
@@ -46,6 +42,8 @@ export const store = reactive({
                 store[category] = res.data.results;
             }
 
+        }).catch((error) => {
+            this.apiError = true;
         })
     },
     notsearched: true,

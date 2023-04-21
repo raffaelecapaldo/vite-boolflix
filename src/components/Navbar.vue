@@ -1,12 +1,12 @@
 <template>
     <nav>
-        <ul class="d-flex">
+        <ul class="d-flex me-4 me-sm-0">
         <a @click="toHome()" href="#"><li>Home</li></a>
-        <a href="#"><li>TV Shows</li></a>
-        <a href="#"><li>Movies</li></a>
-        <a href="#"><li>New & Popular</li></a>
-        <a href="#"><li>My list</li></a>
-        <a href="#"><li>Browse by Languages</li></a>
+        <a class="d-none d-sm-block" href="#"><li>TV Shows</li></a>
+        <a class="d-none d-md-block" href="#"><li>Movies</li></a>
+        <a class="d-none d-md-block" href="#"><li>New & Popular</li></a>
+        <a class="d-none d-lg-block" href="#"><li>My list</li></a>
+        <a class="d-none d-lg-block" href="#"><li>Browse by Languages</li></a>
          </ul>
       </nav>
 </template>
