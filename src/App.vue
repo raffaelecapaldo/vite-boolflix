@@ -22,7 +22,7 @@
       <Trailers v-else-if="store.movies.length === 0 && store.tv.length === 0 && store.notsearched" />
       <MostPopulars v-if="store.movies.length === 0 && store.tv.length === 0 && store.notsearched" />
       <Loader v-else-if="store.searchLoading" />
-      <SearchResult v-else />
+      <SearchResult :key="store.rendering" v-else />
 
       <!-- ---- -->
     </main>
@@ -65,20 +65,25 @@ export default {
     searchShow() {
       store.apiError = false;
       store.searchLoading = true;
-      console.log(store.queryStrings.query);
+      setTimeout(() => {
+      }, 100)
+
       store.queryStrings.query == '' ? store.notsearched = true : store.notsearched = false
       store.getData('search', 'movies'),
         store.getData('search', 'tv')
       function wait() {
         if (store.movies.length > 0 || store.tv.length > 0) {//Controlla se gli array sono vuoti
-          store.searchLoading = false;//Se non lo sono ha finito di caricare
+       
 
+          store.searchLoading = false;//Se non lo sono ha finito di caricare
         }
       }
       setInterval(wait, 100);
       setTimeout(() => {//Se dopo un secondo e mezzo sono ancora vuoti entrambi, non ha trovato nulla, termina il caricamento
         store.searchLoading = false;
       }, 1500)
+
+
     },
   },
   mounted() {
@@ -109,7 +114,7 @@ export default {
 }
 
 .small-logo {
-width: 40px;
+  width: 40px;
 }
 
 .loading {

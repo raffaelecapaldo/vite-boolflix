@@ -22,6 +22,7 @@ export const store = reactive({
     extramovies: [],
     extratv: [],
     apiError: false,
+    rendering:1,
     newRating(rate) {
         rate = parseInt(rate) / 2;
         rate = Math.ceil(rate);
@@ -41,6 +42,8 @@ export const store = reactive({
             else {
                 store[category] = res.data.results;
             }
+            this.rendering++;//Ogni nuova chiamata forza rendering di search
+
 
         }).catch((error) => {
             this.apiError = true;
